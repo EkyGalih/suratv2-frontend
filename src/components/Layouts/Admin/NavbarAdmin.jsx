@@ -1,15 +1,16 @@
 import React from 'react'
-import {NavLink, useNavigate} from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import logo from "./logo.png"
 import { useDispatch, useSelector } from 'react-redux'
 import { LogOut, reset } from "../../../features/authSlice"
+import { IoLogInOutline } from 'react-icons/io5'
 
 const NavbarAdmin = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {user} = useSelector((state) => state.auth);
+    const { user } = useSelector((state) => state.auth);
 
-    const logout = () =>{
+    const logout = () => {
         dispatch(LogOut());
         dispatch(reset);
         navigate("/");
@@ -19,7 +20,7 @@ const NavbarAdmin = () => {
             <nav className="navbar is-fixed-top has-shadow" role="navigation" aria-label="main navigation">
                 <div className="navbar-brand">
                     <NavLink to="/dashboard" className="navbar-item">
-                        <img src={logo} width="112" height="28" alt='logo'/>
+                        <img src={logo} width="112" height="28" alt='logo' />
                     </NavLink>
 
                     <a href='!#' role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -34,7 +35,7 @@ const NavbarAdmin = () => {
                         <div className="navbar-item">
                             <div className="buttons">
                                 <button onClick={logout} className="button is-light">
-                                    Log Out
+                                    <IoLogInOutline /> Logout
                                 </button>
                             </div>
                         </div>
