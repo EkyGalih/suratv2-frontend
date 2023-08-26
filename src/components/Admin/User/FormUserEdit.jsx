@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { IoPlayBack, IoSave } from 'react-icons/io5';
+import { IoCreate, IoPeople, IoPlayBack, IoSave } from 'react-icons/io5';
 
 const FormUserEdit = () => {
     const [pegawai, setPegawai] = useState([]);
@@ -60,8 +60,8 @@ const FormUserEdit = () => {
 
     return (
         <div>
-            <h1 className='title'>Pengguna</h1>
-            <h2 className='subtitle'>Ubah Pengguna</h2>
+            <h1 className='title'><IoPeople/> Pengguna</h1>
+            <h2 className='subtitle'><IoCreate/> Ubah Pengguna</h2>
             <div className="columns is-centered">
                 <div className="column is-half">
                     <div className="card is-shadowless">
@@ -95,15 +95,13 @@ const FormUserEdit = () => {
                                         </div>
                                     </div>
                                     <div className="field">
-                                        <label className="label">Password</label>
                                         <div className="control">
-                                            <input type="text" placeholder='*****' value={password} onChange={(e) => setPassword(e.target.value)} className="input" />
+                                            <input type="hidden" placeholder='*****' value={password} onChange={(e) => setPassword(e.target.value)} className="input" />
                                         </div>
                                     </div>
                                     <div className="field">
-                                        <label className="label">Confirm Password</label>
                                         <div className="control">
-                                            <input type="text" placeholder='*****' value={confPassword} onChange={(e) => setConfPassword(e.target.value)} className="input" />
+                                            <input type="hidden" placeholder='*****' value={confPassword} onChange={(e) => setConfPassword(e.target.value)} className="input" />
                                         </div>
                                     </div>
                                     <div className="field">

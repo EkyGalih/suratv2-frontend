@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate, Link } from 'react-router-dom'
-import { IoPlayBack, IoSave } from 'react-icons/io5'
+import { IoPeople, IoPersonAdd, IoPlayBack, IoSave } from 'react-icons/io5'
 
 const FormUserAdd = () => {
     const [pegawai, setPegawai] = useState([]);
@@ -25,8 +25,9 @@ const FormUserAdd = () => {
     };
 
     const handleChange = async (e) => {
-        setPegawaiId(e.target.value);
-        const response = await axios.get(`http://localhost:5000/pegawai/${pegawaiId}`);
+        const pegId = e.target.value;
+        const response = await axios.get(`http://localhost:5000/pegawai/${pegId}`);
+        setPegawaiId(response.data.id);
         setNama(response.data.name);
         setUsername(response.data.nip);
         setPassword(response.data.nip);
@@ -54,8 +55,8 @@ const FormUserAdd = () => {
 
     return (
         <div>
-            <h1 className='title'>Pengguna</h1>
-            <h2 className='subtitle'>Tambah Pengguna Baru</h2>
+            <h1 className='title'><IoPeople/> Pengguna</h1>
+            <h2 className='subtitle'><IoPersonAdd/> Tambah Pengguna Baru</h2>
             <div className="columns is-centered">
                 <div className="column is-half">
                     <div className="card is-shadowless">
@@ -67,18 +68,13 @@ const FormUserAdd = () => {
                                         <label className="label">Pegawai</label>
                                         <div className="control">
                                             <div className="select is-fullwidth">
-                                                {/* <select value={pegawaiId} onChange={(e) => setPegawaiId(e.target.value)}>
+                                                <select onChange={handleChange}>
                                                     <option value="">--Pilih--</option>
                                                     {pegawai.map((peg, index) => (
-                                                        <option value={peg.id}>{peg.name}</option>
-                                                    ))}
-                                                </select> */}
-                                                <select value={pegawaiId} onChange={handleChange}>
-                                                    <option value="">--Pilih--</option>
-                                                    {pegawai.map((peg, index) => (
-                                                        <option value={peg.id}>{peg.name}</option>
+                                                        <option key={index} value={peg.id}>{peg.name}</option>
                                                     ))}
                                                 </select>
+                                                <input type="hidden" value={pegawaiId} onChange={(e) => setPegawaiId(e.target.value)} className="input" />
                                             </div>
                                         </div>
                                     </div>
