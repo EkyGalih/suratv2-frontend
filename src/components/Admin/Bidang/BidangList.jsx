@@ -47,7 +47,8 @@ const BidangList = () => {
     <div>
         <h1 className='title'><IoBusinessSharp/> Bidang</h1>
             <h2 className='subtitle'><IoList/> Daftar Bidang</h2>
-            <Link to="/admin/bidang/add" className='button is-primary is-small mb-2'><IoCreateOutline/> Tambah Bidang</Link>
+            <Link to="/admin/bidang/add" className='button is-primary is-small mb-2 mr-1'><IoCreateOutline/> Tambah Bidang</Link>
+            <Link to="/admin/sub-bidang/add" className='button is-link is-small mb-2'><IoCreateOutline/> Tambah Sub Bidang</Link>
             
             {/* MODAL KONIFRM DELETE USER */}
             <div className={`modal ${isModal}`}>

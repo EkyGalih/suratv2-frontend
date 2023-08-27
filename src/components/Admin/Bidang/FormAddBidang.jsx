@@ -5,6 +5,7 @@ import { IoAddSharp, IoBusinessSharp, IoPlayBack, IoSave } from 'react-icons/io5
 
 const FormAddBidang = () => {
     const [nama_bidang, setNamaBidang] = useState("");
+    const [sub_bidang, setSubBidang] = useState("tes");
     const [msg, setMsg] = useState("");
     const navigate = useNavigate();
 
@@ -12,7 +13,8 @@ const FormAddBidang = () => {
         e.preventDefault();
         try {
             await axios.post('http://localhost:5000/bidang', {
-                nama_bidang: nama_bidang
+                nama_bidang: nama_bidang,
+                sub_bidang: sub_bidang
             });
             navigate('/admin/bidang');
         } catch (error) {
