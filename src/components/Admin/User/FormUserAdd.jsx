@@ -63,7 +63,7 @@ const FormUserAdd = () => {
                         <div className="card-content">
                             <div className="content">
                                 <form onSubmit={saveUser}>
-                                    <p className="has-text-centered">{msg}</p>
+                                {msg && <p className='has-text-centered notification is-danger'>{msg}</p>}
                                     <div className="field">
                                         <label className="label">Pegawai</label>
                                         <div className="control">
