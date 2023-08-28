@@ -132,7 +132,7 @@ const FromEditPegawai = () => {
                                                     </div>
                                                 </div>
                                                 <div className="field">
-                                                    <label className="label">Nama Pegawai</label>
+                                                    <label className="label">Nama Pegawai <sup className='has-text-danger'>*</sup></label>
                                                     <div className="control">
                                                         <input type="text" className="input" value={name} onChange={(e) => setName(e.target.value)} placeholder="Nama Pegawai" />
                                                     </div>
@@ -152,7 +152,7 @@ const FromEditPegawai = () => {
                                                     </div>
                                                 </div>
                                                 <div className="field">
-                                                    <label className="label">Tempat/Tanggal Lahir</label>
+                                                    <label className="label">Tempat/Tanggal Lahir <sup className='has-text-danger'>*</sup></label>
                                                     <div className="control">
                                                         <div className="columns">
                                                             <div className="column is-three-quarters">
@@ -178,7 +178,7 @@ const FromEditPegawai = () => {
                                                     </div>
                                                 </div>
                                                 <div className="field">
-                                                    <label className="label">Jabatan</label>
+                                                    <label className="label">Jabatan <sup className='has-text-danger'>*</sup></label>
                                                     <div className="control">
                                                         <div className="select is-fullwidth">
                                                             <select value={nama_jabatan} onChange={(e) => setNamaJabatan(e.target.value)}>
@@ -278,13 +278,13 @@ const FromEditPegawai = () => {
                                                     </div>
                                                 </div>
                                                 <div className="field">
-                                                    <label className="label">Umur</label>
+                                                    <label className="label">Umur <sup className='has-text-danger'>*</sup></label>
                                                     <div className="control">
                                                         <input type="number" className="input" value={umur} onChange={(e) => setUmur(e.target.value)} placeholder="Umur" />
                                                     </div>
                                                 </div>
                                                 <div className="field">
-                                                    <label className="label">Jenis Kelamin</label>
+                                                    <label className="label">Jenis Kelamin <sup className='has-text-danger'>*</sup></label>
                                                     <div className="control">
                                                         <div className="select is-fullwidth">
                                                             <select value={jk} onChange={(e) => setJk(e.target.value)}>
@@ -296,7 +296,7 @@ const FromEditPegawai = () => {
                                                     </div>
                                                 </div>
                                                 <div className="field">
-                                                    <label className="label">Agama</label>
+                                                    <label className="label">Agama <sup className='has-text-danger'>*</sup></label>
                                                     <div className="control">
                                                         <div className="select is-fullwidth">
                                                             <select value={agama} onChange={(e) => setAgama(e.target.value)}>
