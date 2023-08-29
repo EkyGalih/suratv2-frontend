@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import { IoAdd, IoCheckboxSharp, IoClose, IoCreateOutline, IoEyeSharp, IoList, IoPerson, IoSearch, IoTrash } from 'react-icons/io5';
+import { IoAdd, IoCheckboxSharp, IoClose, IoCreateOutline, IoEyeSharp, IoList, IoPerson, IoSearch, IoTrash, IoWarningOutline } from 'react-icons/io5';
 import ReactPaginate from 'react-paginate';
 
 const PegawaiList = () => {
@@ -44,7 +44,7 @@ const PegawaiList = () => {
     // FUNGSI HAPUS USER
     const handleDeletePegawai = async () => {
         try {
-            await axios.delete(`http://localhost:5000/bidang/${deleteId}`);
+            await axios.delete(`http://localhost:5000/pegawai/${deleteId}`);
             setModal("");
             getPegawai();
         } catch (error) {
@@ -109,7 +109,7 @@ const PegawaiList = () => {
                 </div>
             </div>
 
-            <p className="has-text-centered">{msg}</p>
+            {msg && <p className="has-text-centered notification is-danger"><IoWarningOutline/> {msg}</p>}
             <table className='table is-striped is-fullwidth'>
                 <thead>
                     <tr>

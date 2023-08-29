@@ -60,7 +60,7 @@ const FromEditPegawai = () => {
             setKp(response.data.kenaikan_pangkat);
             setPensiun(response.data.batas_pensiun);
             setPreview(response.data.url);
-        }
+        };
         getData();
         getPegawaiById();
     }, [id]);
