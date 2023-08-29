@@ -28,13 +28,15 @@ const FromEditPegawai = () => {
     const [jk, setJk] = useState("");
     const [agama, setAgama] = useState("");
     const [kp, setKp] = useState("");
+    const [foto, setFoto] = useState("");
+    const [preview, setPreview] = useState("");
     const [pensiun, setPensiun] = useState("");
-    const {id} = useParams();
+    const { id } = useParams();
     const [msg, setMsg] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
-        const getPegawaiById = async () =>{
+        const getPegawaiById = async () => {
             const response = await axios.get(`http://localhost:5000/pegawai/${id}`)
             setNip(response.data.nip);
             setName(response.data.name);
@@ -57,6 +59,7 @@ const FromEditPegawai = () => {
             setAgama(response.data.agama);
             setKp(response.data.kenaikan_pangkat);
             setPensiun(response.data.batas_pensiun);
+            setPreview(response.data.url);
         }
         getData();
         getPegawaiById();
@@ -71,32 +74,43 @@ const FromEditPegawai = () => {
         setGolongan(responseGolongan.data);
     };
 
+    // Load Image preview
+    const loadImage = (e) => {
+        const image = e.target.files[0];
+        setFoto(image);
+        setPreview(URL.createObjectURL(image));
+    };
+
     const updatePegawai = async (e) => {
         e.preventDefault();
-        console.log(id);
+        const formData = new FormData();
+        formData.append("nip", nip);
+        formData.append("jenis_pegawai", jenis_pegawai);
+        formData.append("name", name);
+        formData.append("tempat_lahir", tempat_lahir);
+        formData.append("tanggal_lahir", tgl_lahir);
+        formData.append("nama_jabatan", nama_jabatan);
+        formData.append("jabatan", jabatan);
+        formData.append("initial_jabatan", jabatan);
+        formData.append("masa_kerja_golongan", mkg);
+        formData.append("diklat", diklat);
+        formData.append("pendidikan", pendidikan);
+        formData.append("no_sk", sk);
+        formData.append("no_rekening", rekening);
+        formData.append("nama_rekening", bank);
+        formData.append("umur", umur);
+        formData.append("jenis_kelamin", jk);
+        formData.append("agama", agama);
+        formData.append("foto", foto);
+        formData.append("kenaikan_pangkat", kp);
+        formData.append("batas_pensiun", pensiun);
+        formData.append("pangkatId", pangkatId);
+        formData.append("golonganId", golonganId);
+        formData.append("bidangId", bidangId);
+
         try {
-            await axios.patch(`http://localhost:5000/pegawai/${id}`, {
-                nip: nip,
-                name: name,
-                jenis_pegawai: jenis_pegawai,
-                tempat_lahir: tempat_lahir,
-                tanggal_lahir: tgl_lahir,
-                nama_jabatan: nama_jabatan,
-                jabatan: jabatan,
-                masa_kerja_golongan: mkg,
-                diklat: diklat,
-                pendidikan: pendidikan,
-                no_sk: sk,
-                no_rekening: rekening,
-                nama_rekening: bank,
-                umur: umur,
-                jenis_kelamin: jk,
-                agama: agama,
-                kenaikan_pangkat: kp,
-                batas_pensiun: pensiun,
-                pangkatId: pangkatId,
-                golonganId: golonganId,
-                bidangId: bidangId
+            await axios.patch(`http://localhost:5000/pegawai/${id}`, formData, {
+                "Content-type": "multipart/form-data"
             });
             navigate('/admin/pegawai');
         } catch (error) {
@@ -322,21 +336,34 @@ const FromEditPegawai = () => {
                                                         <input type="number" className="input" value={pensiun} onChange={(e) => setPensiun(e.target.value)} placeholder="Tahun Pensiun" />
                                                     </div>
                                                 </div>
-                                                <div className="field">
-                                                    <label className="label">Foto</label>
-                                                    <div className="control">
-                                                        <div className="columns">
-                                                            <div className="column is-three-quarters">
-                                                                <div className="file">
-                                                                    <label className="file-label">
-                                                                        <input type="file" className="file-input" />
-                                                                        <span className='file-cta'>
-                                                                            <span className='file-label'>Pilih File</span>
-                                                                        </span>
-                                                                    </label>
+                                                <div className="columns is-fullwidth">
+                                                    <div className="column is-one-third">
+                                                        <div className="field">
+                                                            <label className="label">Foto</label>
+                                                            <div className="control">
+                                                                <div className="columns">
+                                                                    <div className="column is-three-quarters">
+                                                                        <div className="file">
+                                                                            <label className="file-label">
+                                                                                <input type="file" className="file-input" onChange={loadImage} />
+                                                                                <span className='file-cta'>
+                                                                                    <span className='file-label'>Pilih File</span>
+                                                                                </span>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                    <div className="column">
+                                                        {preview ? (
+                                                            <figure className='image is-128x128'>
+                                                                <img src={preview} alt="Prewview Image" />
+                                                            </figure>
+                                                        ) : (
+                                                            ""
+                                                        )}
                                                     </div>
                                                 </div>
                                             </div>

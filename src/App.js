@@ -10,6 +10,7 @@ import PegawaiAdd from "./pages/Admin/Pegawai/PegawaiAdd";
 import PegawaiEdit from "./pages/Admin/Pegawai/PegawaiEdit";
 import BidangAdd from "./pages/Admin/Bidang/BidangAdd";
 import BidangEdit from "./pages/Admin/Bidang/BidangEdit";
+import DetailPegawai from "./pages/Admin/Pegawai/DetailPegawai";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path="/admin/pegawai" element={<Pegawai/>}/>
         <Route path="/admin/pegawai/add" element={<PegawaiAdd/>}/>
         <Route path="/admin/pegawai/edit/:id" element={<PegawaiEdit/>}/>
+        <Route path="/admin/pegawai/show/:id" element={<DetailPegawai/>}/>
 
         <Route path="/admin/bidang" element={<Bidang/>}/>
         <Route path="/admin/bidang/add" element={<BidangAdd/>}/>

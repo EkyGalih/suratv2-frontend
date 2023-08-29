@@ -78,7 +78,7 @@ const UserList = () => {
             <h2 className='subtitle'><IoList /> Daftar Pengguna</h2>
             <div className="columns">
                 <div className="column is-two-thirds">
-                    <Link to="/admin/users/add" className='button is-primary is-small'><IoAdd /> Tambah Pengguna</Link>
+                    <Link to="/admin/users/add" className='button is-primary is-normal'><IoAdd /> Tambah Pengguna</Link>
                 </div>
                 <div className="column">
                     {/* FORM SEARCH DATA */}
@@ -137,7 +137,7 @@ const UserList = () => {
                 </tbody>
             </table>
             <p>Total Data: {rows}, Halaman: {rows ? page + 1 : 0} of {pages}</p>
-            <p className='has-text-centered has-text-danger'>{msg}</p>
+            <p className='has-text-centered has-text-danger'>{msgPage}</p>
             <nav className="pagination is-centered" key={rows} role='navigation' aria-label='pagination'>
                 <ReactPaginate
                     previousLabel={"< Prev"}
