@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { IoAdd, IoCreateOutline, IoPeople, IoPlayBack } from 'react-icons/io5'
+import { IoCreateOutline, IoPeople, IoPlayBack, IoSave } from 'react-icons/io5'
 import axios from 'axios';
 
 const FromEditPegawai = () => {
@@ -372,7 +372,7 @@ const FromEditPegawai = () => {
 
                                     <div className="field">
                                         <div className="control">
-                                            <button type="submit" className="button is-success mr-2"><IoAdd /> Simpan</button>
+                                            <button type="submit" className="button is-success mr-2"><IoSave /> Simpan</button>
                                             <Link to="/admin/pegawai" className='button is-default'><IoPlayBack className='mr-1' />Kembali</Link>
                                         </div>
                                     </div>
