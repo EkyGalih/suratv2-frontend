@@ -28,7 +28,7 @@ const FromAddPegawai = () => {
     const [jk, setJk] = useState("");
     const [agama, setAgama] = useState("");
     const [kp, setKp] = useState("");
-    const [pensiun, setPensiun] = useState("");
+    const [pensiun, setPensiun] = useState(0);
     const [foto, setFoto] = useState("");
     const [preview, setPreview] = useState("");
     const [msg, setMsg] = useState("");
@@ -86,7 +86,7 @@ const FromAddPegawai = () => {
             await axios.post("http://localhost:5000/pegawai", formData, {
                 "Content-type": "multipart/form-data"
             });
-            navigate("/admin/pegawai");
+            navigate("/admin/pegawai", {state: {msg: "Pegawai berhasil dibuat!"}});
         } catch (error) {
             if (error.response) {
                 setMsg(error.response.data.msg);
@@ -126,7 +126,7 @@ const FromAddPegawai = () => {
                                                     </div>
                                                 </div>
                                                 <div className="field">
-                                                    <label className="label">Jenis Pegawai</label>
+                                                    <label className="label">Jenis Pegawai <sup className='has-text-danger'>*</sup></label>
                                                     <div className="control">
                                                         <div className="select is-fullwidth">
                                                             <select value={jenis_pegawai} onChange={(e) => setJenisPegawai(e.target.value)}>
@@ -153,7 +153,7 @@ const FromAddPegawai = () => {
                                                     </div>
                                                 </div>
                                                 <div className="field">
-                                                    <label className="label">Bidang</label>
+                                                    <label className="label">Bidang <sup className='has-text-danger'>*</sup></label>
                                                     <div className="control">
                                                         <div className="select is-fullwidth">
                                                             <select value={bidangId} onChange={(e) => setBidangId(e.target.value)}>

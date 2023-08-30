@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
-import { IoAdd, IoCheckboxSharp, IoClose, IoCreateOutline, IoEyeSharp, IoList, IoPerson, IoSearch, IoTrash, IoWarningOutline } from 'react-icons/io5';
+import { Link, useLocation } from 'react-router-dom';
+import { IoAdd, IoCheckboxSharp, IoClose, IoCreateOutline, IoEyeSharp, IoList, IoPerson, IoSearch, IoTrash } from 'react-icons/io5';
 import ReactPaginate from 'react-paginate';
 
 const PegawaiList = () => {
@@ -13,6 +13,7 @@ const PegawaiList = () => {
     const [keyword, setKeyword] = useState("");
     const [query, setQuery] = useState("");
     const [msgPage, setMsgPage] = useState("");
+    const location = useLocation();
 
     const [deleteId, setDeleteId] = useState("");
     const [isModal, setModal] = useState("");
@@ -20,6 +21,11 @@ const PegawaiList = () => {
 
     useEffect(() => {
         getPegawai();
+        if (location.state != null) {
+            setMsg(location.state.msg);
+        } else {
+            setMsg("");
+        }
     }, [page, keyword]);
 
     const getPegawai = async () => {
@@ -33,6 +39,11 @@ const PegawaiList = () => {
     // FUNGSI HANDLE CLOSE (CLOSE MODAL)
     const handleClose = () => {
         setModal("");
+    }
+
+    // FUNGSI HANDLE CLOSE (CLOSE NOTIFICATION)
+    const closeNotif = () => {
+        setMsg("");
     }
 
     // FUNGSI UNTUK MEMBERIKAN PARAMETER KE MODAL DAN DIKIRIM KE FUNSGI handleDeleteUser
@@ -77,7 +88,7 @@ const PegawaiList = () => {
             <h2 className='subtitle'><IoList /> Daftar Pegawai</h2>
             <div className="columns">
                 <div className="column is-two-thrids">
-                    <Link to='/admin/pegawai/add' className='button is-normal is-primary'><IoAdd className='mr-1' />Tambah Pegawai</Link>
+                    <Link to='/admin/pegawai/add' className='button is-normal is-info'><IoAdd className='mr-1' />Tambah Pegawai</Link>
                 </div>
                 <div className="column">
                     {/* FORM SEARCH DATA */}
@@ -109,7 +120,7 @@ const PegawaiList = () => {
                 </div>
             </div>
 
-            {msg && <p className="has-text-centered notification is-danger"><IoWarningOutline/> {msg}</p>}
+            {msg && <div className="columns is-fullwidth notification is-success is-light"> <div className='column is-four-fifths'>{msg}</div> <div className="column"></div> <div className='column'><sup><button className='button is-small is-text has-text-right' onClick={closeNotif}>&times;</button></sup></div></div>}
             <table className='table is-striped is-fullwidth'>
                 <thead>
                     <tr>

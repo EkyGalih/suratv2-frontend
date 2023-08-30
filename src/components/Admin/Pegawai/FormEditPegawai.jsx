@@ -91,7 +91,6 @@ const FromEditPegawai = () => {
         formData.append("tanggal_lahir", tgl_lahir);
         formData.append("nama_jabatan", nama_jabatan);
         formData.append("jabatan", jabatan);
-        formData.append("initial_jabatan", jabatan);
         formData.append("masa_kerja_golongan", mkg);
         formData.append("diklat", diklat);
         formData.append("pendidikan", pendidikan);
@@ -112,7 +111,7 @@ const FromEditPegawai = () => {
             await axios.patch(`http://localhost:5000/pegawai/${id}`, formData, {
                 "Content-type": "multipart/form-data"
             });
-            navigate('/admin/pegawai');
+            navigate('/admin/pegawai', {state: {msg: "Pegawai berhasil diubah"}});
         } catch (error) {
             if (error.response) {
                 setMsg(error.response.data.msg);
