@@ -91,82 +91,84 @@ const UserList = () => {
         <div>
             <h1 className='title'><IoPeople /> Pengguna</h1>
             <h2 className='subtitle'><IoList /> Daftar Pengguna</h2>
-            <div className="columns">
-                <div className="column is-two-thirds">
-                    <Link to="/admin/users/add" className='button is-info is-normal'><IoAdd /> Tambah Pengguna</Link>
-                </div>
-                <div className="column">
-                    {/* FORM SEARCH DATA */}
-                    <form onSubmit={searchData}>
-                        <div className="field has-addons">
-                            <div className="control is-expanded">
-                                <input type="text" className="input" value={query} onChange={(e) => setQuery(e.target.value)} placeholder='Cari Pengguna' />
+            <div className='box mr-2'>
+                <div className="columns">
+                    <div className="column is-two-thirds">
+                        <Link to="/admin/users/add" className='button is-info is-normal'><IoAdd /> Tambah Pengguna</Link>
+                    </div>
+                    <div className="column">
+                        {/* FORM SEARCH DATA */}
+                        <form onSubmit={searchData}>
+                            <div className="field has-addons">
+                                <div className="control is-expanded">
+                                    <input type="text" className="input" value={query} onChange={(e) => setQuery(e.target.value)} placeholder='Cari Pengguna' />
+                                </div>
+                                <div className="control">
+                                    <button className="button is-info" type='submit'><IoSearch /> Cari</button>
+                                </div>
                             </div>
-                            <div className="control">
-                                <button className="button is-info" type='submit'><IoSearch /> Cari</button>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
-            </div>
 
-            {/* MODAL KONIFRM DELETE USER */}
-            <div className={`modal ${isModal}`}>
-                <div className="modal-background"></div>
-                <div className="modal-card">
-                    <header className="modal-card-head">
-                        <p className="modal-card-title">Apakah anda yakin?</p>
-                        <button className="delete" aria-label="close" onClick={handleClose}></button>
-                    </header>
-                    <footer className="modal-card-foot">
-                        <button className="button is-danger" onClick={handleDeleteUser}><IoCheckboxSharp className='mr-1' /> yes</button>
-                        <button className="button is-default" onClick={handleClose}><IoClose className='mr-1' /> No</button>
-                    </footer>
+                {/* MODAL KONIFRM DELETE USER */}
+                <div className={`modal ${isModal}`}>
+                    <div className="modal-background"></div>
+                    <div className="modal-card">
+                        <header className="modal-card-head">
+                            <p className="modal-card-title">Apakah anda yakin?</p>
+                            <button className="delete" aria-label="close" onClick={handleClose}></button>
+                        </header>
+                        <footer className="modal-card-foot">
+                            <button className="button is-danger" onClick={handleDeleteUser}><IoCheckboxSharp className='mr-1' /> yes</button>
+                            <button className="button is-default" onClick={handleClose}><IoClose className='mr-1' /> No</button>
+                        </footer>
+                    </div>
                 </div>
-            </div>
 
-            {msg && <div className="columns is-fullwidth notification is-success is-light p-1"> <div className='column is-four-fifths'>{msg}</div> <div className="column"></div> <div className='column'><sup><button className='button is-small is-text has-text-right' onClick={closeNotif}>&times;</button></sup></div></div>}
-            <table className='table is-striped is-hoverable is-fullwidth'>
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Pengguna</th>
-                        <th>Username</th>
-                        <th>Level</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map((user, index) => (
-                        <tr key={user.id}>
-                            <td>{index + 1}</td>
-                            <td>{user.nama_lengkap}</td>
-                            <td>{user.username}</td>
-                            <td>{user.level}</td>
-                            <td>
-                                <Link to={`/admin/users/edit/${user.id}`} className='button is-small is-info mr-1'><IoCreateOutline /> Edit</Link>
-                                <button onClick={() => deleteUser(user.id)} className='button is-small is-danger'><IoTrash /> Hapus</button>
-                            </td>
+                {msg && <div className="columns is-fullwidth notification is-success is-light p-1"> <div className='column is-four-fifths'>{msg}</div> <div className="column"></div> <div className='column'><sup><button className='delete is-small has-text-right' onClick={closeNotif}>&times;</button></sup></div></div>}
+                <table className='table is-striped is-hoverable is-fullwidth'>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Pengguna</th>
+                            <th>Username</th>
+                            <th>Level</th>
+                            <th>Actions</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-            <p>Total Data: {rows}, Halaman: {rows ? page + 1 : 0} of {pages}</p>
-            <p className='has-text-centered has-text-danger'>{msgPage}</p>
-            <nav className="pagination is-centered" key={rows} role='navigation' aria-label='pagination'>
-                <ReactPaginate
-                    previousLabel={"< Prev"}
-                    nextLabel={"Next >"}
-                    pageCount={Math.min(10, pages)}
-                    onPageChange={changePage}
-                    containerClassName={"pagination-list"}
-                    pageLinkClassName={"pagination-link"}
-                    previousLinkClassName={"pagination-previous"}
-                    nextLinkClassName={"pagination-next"}
-                    activeLinkClassName={"pagination-link is-current"}
-                    disabledLinkClassName={"pagination-link is-disabled"}
-                />
-            </nav>
+                    </thead>
+                    <tbody>
+                        {users.map((user, index) => (
+                            <tr key={user.id}>
+                                <td>{index + 1}</td>
+                                <td>{user.nama_lengkap}</td>
+                                <td>{user.username}</td>
+                                <td>{user.level}</td>
+                                <td>
+                                    <Link to={`/admin/users/edit/${user.id}`} className='button is-small is-info mr-1'><IoCreateOutline /> Edit</Link>
+                                    <button onClick={() => deleteUser(user.id)} className='button is-small is-danger'><IoTrash /> Hapus</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                <p>Total Data: {rows}, Halaman: {rows ? page + 1 : 0} of {pages}</p>
+                <p className='has-text-centered has-text-danger'>{msgPage}</p>
+                <nav className="pagination is-centered" key={rows} role='navigation' aria-label='pagination'>
+                    <ReactPaginate
+                        previousLabel={"< Prev"}
+                        nextLabel={"Next >"}
+                        pageCount={Math.min(10, pages)}
+                        onPageChange={changePage}
+                        containerClassName={"pagination-list"}
+                        pageLinkClassName={"pagination-link"}
+                        previousLinkClassName={"pagination-previous"}
+                        nextLinkClassName={"pagination-next"}
+                        activeLinkClassName={"pagination-link is-current"}
+                        disabledLinkClassName={"pagination-link is-disabled"}
+                    />
+                </nav>
+            </div>
         </div>
     )
 }

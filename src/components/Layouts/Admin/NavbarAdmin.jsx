@@ -1,9 +1,9 @@
 import React from 'react'
-import { NavLink, useNavigate } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import logo from "./logo.png"
 import { useDispatch, useSelector } from 'react-redux'
 import { LogOut, reset } from "../../../features/authSlice"
-import { IoLogInOutline } from 'react-icons/io5'
+import { IoApps, IoIdCard, IoLogInOutline } from 'react-icons/io5'
 
 const NavbarAdmin = () => {
     const dispatch = useDispatch();
@@ -33,10 +33,21 @@ const NavbarAdmin = () => {
                 <div id="navbarBasicExample" className="navbar-menu">
                     <div className="navbar-end">
                         <div className="navbar-item">
-                            <div className="buttons">
-                                <button onClick={logout} className="button is-light">
-                                    <IoLogInOutline /> Logout
-                                </button>
+                            <div className="navbar-item has-dropdown is-hoverable mr-5">
+                                <a className="navbar-link" href="https://bulma.io/documentation/overview/start/">
+                                    <IoApps className='mr-1'/> Tools
+                                </a>
+                                <div className="navbar-dropdown is-boxed">
+                                    <Link className='navbar-item' to={`/admin/profile/${user && user.id}`}>
+                                        <IoIdCard className='mr-1'/> Profile
+                                    </Link>
+                                    <hr className="navbar-divider" />
+                                    <div className="buttons">
+                                        <button onClick={logout} className="button is-text">
+                                            <IoLogInOutline className='mr-1' /> Keluar
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

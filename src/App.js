@@ -11,6 +11,7 @@ import PegawaiEdit from "./pages/Admin/Pegawai/PegawaiEdit";
 import BidangAdd from "./pages/Admin/Bidang/BidangAdd";
 import BidangEdit from "./pages/Admin/Bidang/BidangEdit";
 import DetailPegawai from "./pages/Admin/Pegawai/DetailPegawai";
+import Profile from "./pages/Admin/Profile/Profile";
 
 
 function App() {
@@ -34,6 +35,10 @@ function App() {
         <Route path="/admin/bidang" element={<Bidang/>}/>
         <Route path="/admin/bidang/add" element={<BidangAdd/>}/>
         <Route path="/admin/bidang/edit/:id" element={<BidangEdit/>}/>
+
+        {/* PROFILE */}
+        <Route path="/admin/profile/:id" element={<Profile/>} />
+
         {/* End Route Admin */}
       </Routes>
      </BrowserRouter>

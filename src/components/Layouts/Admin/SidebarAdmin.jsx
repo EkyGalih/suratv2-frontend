@@ -23,7 +23,7 @@ const SidebarAdmin = () => {
                     MENU
                 </p>
                 <ul className="menu-list">
-                    <li><NavLink to={"/admin/dashboard"}><IoHome/> Dashboard</NavLink></li>
+                    <li><NavLink to={"/admin/dashboard"} className='is-active'><IoHome/> Dashboard</NavLink></li>
                     <li><NavLink to={"/admin/pegawai"}><IoPeople/> Pegawai</NavLink></li>
                     <li><NavLink to={"/admin/users"}><IoPerson/> Users</NavLink></li>
                     <li><NavLink to={"/admin/bidang"}><IoBusinessSharp/> Bidang</NavLink></li>
