@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { IoAdd, IoCheckboxSharp, IoClose, IoCreateOutline, IoEyeSharp, IoList, IoPerson, IoSearch, IoTrash } from 'react-icons/io5';
 import ReactPaginate from 'react-paginate';
 
@@ -13,7 +13,9 @@ const PegawaiList = () => {
     const [keyword, setKeyword] = useState("");
     const [query, setQuery] = useState("");
     const [msgPage, setMsgPage] = useState("");
+
     const location = useLocation();
+    const navigate = useNavigate();
 
     const [deleteId, setDeleteId] = useState("");
     const [isModal, setModal] = useState("");
@@ -43,6 +45,7 @@ const PegawaiList = () => {
 
     // FUNGSI HANDLE CLOSE (CLOSE NOTIFICATION)
     const closeNotif = () => {
+        navigate(location.state, {});
         setMsg("");
     }
 
@@ -58,6 +61,7 @@ const PegawaiList = () => {
             await axios.delete(`http://localhost:5000/pegawai/${deleteId}`);
             setModal("");
             getPegawai();
+            setMsg("Pegawai Berhasil dihapus!");
         } catch (error) {
             if (error.response) {
                 setMsg(error.response.data.msg);
@@ -120,7 +124,7 @@ const PegawaiList = () => {
                 </div>
             </div>
 
-            {msg && <div className="columns is-fullwidth notification is-success is-light"> <div className='column is-four-fifths'>{msg}</div> <div className="column"></div> <div className='column'><sup><button className='button is-small is-text has-text-right' onClick={closeNotif}>&times;</button></sup></div></div>}
+            {msg && <div className="columns is-fullwidth notification is-success is-light p-1"> <div className='column is-four-fifths'>{msg}</div> <div className="column"></div> <div className='column'><sup><button className='button is-small is-text has-text-right' onClick={closeNotif}>&times;</button></sup></div></div>}
             <table className='table is-striped is-fullwidth'>
                 <thead>
                     <tr>

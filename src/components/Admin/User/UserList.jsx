@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import ReactPaginate from 'react-paginate'
 import axios from 'axios'
 import { IoAdd, IoCheckboxSharp, IoClose, IoCreateOutline, IoList, IoPeople, IoSearch, IoTrash } from 'react-icons/io5';
@@ -14,12 +14,20 @@ const UserList = () => {
     const [query, setQuery] = useState("");
     const [msgPage, setMsgPage] = useState("");
 
+    const location = useLocation();
+    const navigate = useNavigate();
+
     const [deleteId, setDeleteId] = useState("");
     const [isModal, setModal] = useState("");
     const [msg, setMsg] = useState("");
 
     useEffect(() => {
         getUsers();
+        if (location.state != null) {
+            setMsg(location.state.msg);
+        } else {
+            setMsg("");
+        }
     }, [page, keyword]);
 
     // FUNGSI GET USER
@@ -36,6 +44,12 @@ const UserList = () => {
         setModal("");
     }
 
+    // FUNGSI HANDLE CLOSE (CLOSE NOTIFICATION)
+    const closeNotif = () => {
+        navigate(location.state, {});
+        setMsg("");
+    }
+
     // FUNGSI UNTUK MEMBERIKAN PARAMETER KE MODAL DAN DIKIRIM KE FUNSGI handleDeleteUser
     const deleteUser = async (userId) => {
         setDeleteId(userId);
@@ -48,6 +62,7 @@ const UserList = () => {
             await axios.delete(`http://localhost:5000/users/${deleteId}`);
             setModal("");
             getUsers();
+            setMsg("Pengguna berhasil dihapus!");
         } catch (error) {
             if (error.response) {
                 setMsg(error.response.data.msg);
@@ -78,7 +93,7 @@ const UserList = () => {
             <h2 className='subtitle'><IoList /> Daftar Pengguna</h2>
             <div className="columns">
                 <div className="column is-two-thirds">
-                    <Link to="/admin/users/add" className='button is-primary is-normal'><IoAdd /> Tambah Pengguna</Link>
+                    <Link to="/admin/users/add" className='button is-info is-normal'><IoAdd /> Tambah Pengguna</Link>
                 </div>
                 <div className="column">
                     {/* FORM SEARCH DATA */}
@@ -110,7 +125,7 @@ const UserList = () => {
                 </div>
             </div>
 
-            <p className="has-text-centered">{msg}</p>
+            {msg && <div className="columns is-fullwidth notification is-success is-light p-1"> <div className='column is-four-fifths'>{msg}</div> <div className="column"></div> <div className='column'><sup><button className='button is-small is-text has-text-right' onClick={closeNotif}>&times;</button></sup></div></div>}
             <table className='table is-striped is-hoverable is-fullwidth'>
                 <thead>
                     <tr>

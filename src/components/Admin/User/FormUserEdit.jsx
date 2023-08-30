@@ -35,7 +35,7 @@ const FormUserEdit = () => {
     }, [id]);
 
     const getPegawai = async () => {
-        const response = await axios.get('http://localhost:5000/pegawai');
+        const response = await axios.get('http://localhost:5000/pegawais');
         setPegawai(response.data);
     };
 
@@ -50,7 +50,7 @@ const FormUserEdit = () => {
                 confPassword: confPassword,
                 level: level
             });
-            navigate("/admin/users");
+            navigate("/admin/users", {state: {msg: "Pengguna berhasil diperbaharui!"}});
         } catch (error) {
             if (error.response) {
                 setMsg(error.response.data.msg);
