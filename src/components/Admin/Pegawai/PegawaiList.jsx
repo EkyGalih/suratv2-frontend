@@ -133,7 +133,7 @@ const PegawaiList = () => {
                             <th>Nama Pegawai</th>
                             <th>Nip</th>
                             <th>Jenis Pegawai</th>
-                            <th>Actions</th>
+                                <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>

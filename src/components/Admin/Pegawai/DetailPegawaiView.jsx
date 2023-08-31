@@ -9,17 +9,12 @@ const DetailPegawaiView = () => {
   const [jenis_pegawai, setJenisPegawai] = useState("");
   const [tempat_lahir, setTempatlahir] = useState("");
   const [tgl_lahir, setTglLahir] = useState("");
-  const [bidangId, setBidangId] = useState("");
-  const [jabatan, setJabatan] = useState("");
+  const [bidangId, setBidangId] = useState("")
   const [nama_jabatan, setNamaJabatan] = useState("");
   const [sk, setSk] = useState("");
-  const [bank, setBank] = useState("");
-  const [rekening, setRekening] = useState("");
   const [pangkatId, setPangkatId] = useState("");
   const [golonganId, setGolonganId] = useState("");
   const [mkg, setMkg] = useState("");
-  const [diklat, setDiklat] = useState("");
-  const [pendidikan, setPendidikan] = useState("");
   const [umur, setUmur] = useState("");
   const [jk, setJk] = useState("");
   const [agama, setAgama] = useState("");
@@ -28,12 +23,10 @@ const DetailPegawaiView = () => {
   const [url, setUrl] = useState("");
   const [foto, setFoto] = useState("");
   const { id } = useParams();
-  const [msg, setMsg] = useState("");
 
   useEffect(() => {
     const getPegawaiById = async () => {
       const response = await axios.get(`http://localhost:5000/pegawai/${id}`);
-      console.log(response.data);
       setName(response.data.name);
       setNamaJabatan(response.data.jabatan);
       setTempatlahir(response.data.tempat_lahir);
@@ -80,8 +73,8 @@ const DetailPegawaiView = () => {
               <p className="subtitle is-5"><IoBriefcase /> {nama_jabatan}</p>
               <p><IoCalendar /> {tempat_lahir + ', ' + tgl_lahir + ' (' + umur + ' Tahun)'}</p>
               <p><IoMedal /> Nomor SK: {sk ?? '-'} ({mkg ?? '-'})</p>
-              {jenis_pegawai == 'pns' ? <p><IoTrendingUp /> {kp}</p> : ''}
-              {jenis_pegawai == 'pns' ? <p><IoPower /> Pensiun Tahun {pensiun}</p> : ''}
+              {jenis_pegawai === 'pns' ? <p><IoTrendingUp /> {kp}</p> : ''}
+              {jenis_pegawai === 'pns' ? <p><IoPower /> Pensiun Tahun {pensiun}</p> : ''}
               <div className="columns column is-one-fifth mt-2">
                 <div className="tag is-success mr-2">{jk ?? '-'}</div>
                 <div className="tag is-success mr-2">{agama ?? '-'}</div>

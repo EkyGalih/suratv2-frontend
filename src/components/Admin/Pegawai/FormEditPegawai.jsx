@@ -111,7 +111,7 @@ const FromEditPegawai = () => {
             await axios.patch(`http://localhost:5000/pegawai/${id}`, formData, {
                 "Content-type": "multipart/form-data"
             });
-            navigate('/admin/pegawai', {state: {msg: "Pegawai berhasil diubah"}});
+            navigate((-1), {replace: true, state: {msg: "Pegawai berhasil diubah"}});
         } catch (error) {
             if (error.response) {
                 setMsg(error.response.data.msg);
@@ -372,7 +372,7 @@ const FromEditPegawai = () => {
                                     <div className="field">
                                         <div className="control">
                                             <button type="submit" className="button is-success mr-2"><IoSave /> Simpan</button>
-                                            <Link to="/admin/pegawai" className='button is-default'><IoPlayBack className='mr-1' />Kembali</Link>
+                                            <Link to={-1} className='button is-default'><IoPlayBack className='mr-1' />Kembali</Link>
                                         </div>
                                     </div>
 
