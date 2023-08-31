@@ -19,7 +19,7 @@ const LayoutAdmin = ({ children }) => {
         navigate("/");
       }
       if (user && user.level !== 'admin') {
-        navigate("/admin/dashboard");
+        navigate(-1);
       }
     }, [isError, user, navigate]);
 
